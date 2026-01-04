@@ -31,7 +31,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void TestEmptyList() {
+    public void testEmptyList() {
         List<SleepingSession> sessions = new ArrayList<>();
         CountSessionsFunction func = new CountSessionsFunction();
         SleepAnalyticsResult result = func.apply(sessions);
@@ -40,7 +40,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void TestMaxSleepDuration() {
+    public void testMaxSleepDuration() {
         List<SleepingSession> sessions = new ArrayList<>();
         SleepingSession s1 = new SleepingSession(LocalDateTime.of(2026, 1, 1, 22, 0),
                 LocalDateTime.of(2026, 1, 2, 0, 0),
@@ -68,7 +68,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    public void TestMinimalSleepDuration() {
+    public void testMinimalSleepDuration() {
         List<SleepingSession> sessions = new ArrayList<>();
         SleepingSession s1 = new SleepingSession(LocalDateTime.of(2026, 1, 1, 22, 0),
                 LocalDateTime.of(2026, 1, 2, 6, 0),
@@ -161,7 +161,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    void TestNoInsomniaNights() {
+    void testNoInsomniaNights() {
         InsomniaNightsFunction func = new InsomniaNightsFunction();
         SleepingSession s1 = new SleepingSession(
                 LocalDateTime.of(2026, 1, 3, 23, 0),
@@ -209,7 +209,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    void NoInsomniaNightsEmptyList() {
+    void noInsomniaNightsEmptyList() {
         InsomniaNightsFunction func = new InsomniaNightsFunction();
         SleepAnalyticsResult result = func.apply(List.of());
         assertEquals("Количество бессонных ночей: ", result.getDescription());
@@ -218,7 +218,7 @@ public class SleepTrackerAppTest {
 
 
     @Test
-    void TestEmptyListReturnDove() {
+    void testEmptyListReturnDove() {
         ChronotypeFinder func = new ChronotypeFinder();
         SleepAnalyticsResult result = func.apply(List.of());
         assertEquals("Ваш тип: ", result.getDescription());
@@ -226,7 +226,7 @@ public class SleepTrackerAppTest {
     }
 
     @Test
-    void TestOwlChronotype() {
+    void testOwlChronotype() {
         SleepingSession s1 = new SleepingSession(
                 LocalDateTime.of(2026, 1, 1, 23, 30),
                 LocalDateTime.of(2026, 1, 2, 9, 30),
