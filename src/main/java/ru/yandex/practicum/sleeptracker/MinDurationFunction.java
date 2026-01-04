@@ -11,7 +11,7 @@ public class MinDurationFunction implements Function<List<SleepingSession>, Slee
                 .mapToLong(SleepingSession::getDuration)
                 .min()
                 .orElse(0);
-        return new  SleepAnalyticsResult("Минимальная продолжительность сна в минутах: ", min);
+        return new SleepAnalyticsResult("Минимальная продолжительность сна в минутах: ", min);
 
     }
 }

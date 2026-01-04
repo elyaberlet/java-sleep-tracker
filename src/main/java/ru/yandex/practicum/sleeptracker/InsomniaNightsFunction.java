@@ -44,8 +44,8 @@ public class InsomniaNightsFunction implements Function<List<SleepingSession>, S
         return (int) Stream.iterate(firstNightDate, d -> !d.isAfter(lastNightDate), d -> d.plusDays(1))
                 .filter(date -> sessions.stream().noneMatch(s ->
                         s.getStart().isBefore(date.atTime(6, 0)) &&
-                        s.getEnd().isAfter(date.atStartOfDay())
-                        ))
+                                s.getEnd().isAfter(date.atStartOfDay())
+                ))
                 .count();
     }
 }

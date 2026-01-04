@@ -40,6 +40,7 @@ public class SleepTrackerApp {
             throw new RuntimeException("Ошибка чтения файла: " + e.getMessage());
         }
     }
+
     public static List<SleepingSession> loadSessions(String filePath) throws IOException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy HH:mm");
         return Files.lines(Paths.get(filePath)).map(line -> {
@@ -57,4 +58,4 @@ public class SleepTrackerApp {
             System.out.println(result.getDescription() + result.getValue());
         });
     }
-    }
+}

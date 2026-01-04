@@ -11,7 +11,7 @@ public class MaxDurationFunction implements Function<List<SleepingSession>, Slee
                 .mapToLong(SleepingSession::getDuration)
                 .max()
                 .orElse(0);
-        return new  SleepAnalyticsResult("Максимальная продолжительность сна в минутах: ", max);
+        return new SleepAnalyticsResult("Максимальная продолжительность сна в минутах: ", max);
 
     }
 }

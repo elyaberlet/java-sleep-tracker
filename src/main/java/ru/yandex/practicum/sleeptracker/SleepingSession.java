@@ -9,7 +9,7 @@ public class SleepingSession {
     private final SleepQuality quality;
 
     public SleepingSession(LocalDateTime start, LocalDateTime end, SleepQuality quality) {
-        this.start =start;
+        this.start = start;
         this.end = end;
         this.quality = quality;
     }
