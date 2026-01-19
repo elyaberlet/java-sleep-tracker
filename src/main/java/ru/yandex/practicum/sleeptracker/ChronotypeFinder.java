@@ -7,37 +7,39 @@ import java.util.List;
 import java.util.function.Function;
 
 public class ChronotypeFinder implements Function<List<SleepingSession>, SleepAnalyticsResult> {
+
+    private static final LocalTime OWL_START = LocalTime.of(23,0);
+    private static final LocalTime OWL_END = LocalTime.of(9,0);
+    private static final LocalTime LARK_START = LocalTime.of(22,0);
+    private static final LocalTime LARK_END = LocalTime.of(7,0);
+
+
     @Override
     public SleepAnalyticsResult apply(List<SleepingSession> sessions) {
         return new SleepAnalyticsResult("Ваш тип: ", findChronotype(sessions));
     }
-
-    enum Chronotype {
-        СОВА, ЖАВОРОНОК, ГОЛУБЬ
-    }
-
-    public static Chronotype findChronotype(List<SleepingSession> sessions) {
-        if (sessions == null || sessions.isEmpty()) return Chronotype.ГОЛУБЬ;
+    public static String findChronotype(List<SleepingSession> sessions) {
+        if (sessions == null || sessions.isEmpty()) return Chronotype.DOVE.getRussianName();
         int owls = (int) sessions.stream()
                 .filter(ChronotypeFinder::isNightSession)
-                .filter(s -> s.getStart().toLocalTime().isAfter(LocalTime.of(23, 0)) &&
-                        s.getEnd().toLocalTime().isAfter(LocalTime.of(9, 0)))
+                .filter(s -> s.getStart().toLocalTime().isAfter(OWL_START) &&
+                        s.getEnd().toLocalTime().isAfter(OWL_END))
                 .count();
 
         int larks = (int) sessions.stream()
                 .filter(ChronotypeFinder::isNightSession)
-                .filter(s -> s.getStart().toLocalTime().isBefore(LocalTime.of(22, 0)) &&
-                        s.getEnd().toLocalTime().isBefore(LocalTime.of(7, 0)))
+                .filter(s -> s.getStart().toLocalTime().isBefore(LARK_START) &&
+                        s.getEnd().toLocalTime().isBefore(LARK_END))
                 .count();
 
         int doves = (int) sessions.stream()
                 .filter(ChronotypeFinder::isNightSession)
                 .count() - owls - larks;
 
-        if (owls > larks && owls > doves) return Chronotype.СОВА;
-        if (larks > owls && larks > doves) return Chronotype.ЖАВОРОНОК;
+        if (owls > larks && owls > doves) return Chronotype.OWL.getRussianName();
+        if (larks > owls && larks > doves) return Chronotype.LARK.getRussianName();
 
-        return Chronotype.ГОЛУБЬ;
+        return Chronotype.DOVE.getRussianName();
     }
 
     private static boolean isNightSession(SleepingSession s) {

@@ -222,7 +222,7 @@ public class SleepTrackerAppTest {
         ChronotypeFinder func = new ChronotypeFinder();
         SleepAnalyticsResult result = func.apply(List.of());
         assertEquals("Ваш тип: ", result.getDescription());
-        assertEquals(ChronotypeFinder.Chronotype.ГОЛУБЬ, result.getValue());
+        assertEquals(Chronotype.DOVE.getRussianName(), result.getValue());
     }
 
     @Test
@@ -232,8 +232,8 @@ public class SleepTrackerAppTest {
                 LocalDateTime.of(2026, 1, 2, 9, 30),
                 SleepQuality.GOOD);
 
-        ChronotypeFinder.Chronotype result = ChronotypeFinder.findChronotype(List.of(s1));
-        assertEquals(ChronotypeFinder.Chronotype.СОВА, result);
+        String result = ChronotypeFinder.findChronotype(List.of(s1));
+        assertEquals(Chronotype.OWL.getRussianName(), result);
     }
 
     @Test
@@ -243,8 +243,8 @@ public class SleepTrackerAppTest {
                 LocalDateTime.of(2026, 1, 2, 6, 30),
                 SleepQuality.GOOD);
 
-        ChronotypeFinder.Chronotype result = ChronotypeFinder.findChronotype(List.of(s1));
-        assertEquals(ChronotypeFinder.Chronotype.ЖАВОРОНОК, result);
+        String result = ChronotypeFinder.findChronotype(List.of(s1));
+        assertEquals(Chronotype.LARK.getRussianName(), result);
     }
 
     @Test
@@ -253,8 +253,8 @@ public class SleepTrackerAppTest {
                 LocalDateTime.of(2026, 1, 1, 22, 30),
                 LocalDateTime.of(2026, 1, 2, 8, 0),
                 SleepQuality.NORMAL);
-        ChronotypeFinder.Chronotype result = ChronotypeFinder.findChronotype(List.of(s1));
-        assertEquals(ChronotypeFinder.Chronotype.ГОЛУБЬ, result);
+        String result = ChronotypeFinder.findChronotype(List.of(s1));
+        assertEquals(Chronotype.DOVE.getRussianName(), result);
     }
 }
 
