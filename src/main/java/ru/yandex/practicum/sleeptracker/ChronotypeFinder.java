@@ -8,17 +8,18 @@ import java.util.function.Function;
 
 public class ChronotypeFinder implements Function<List<SleepingSession>, SleepAnalyticsResult> {
 
-    private static final LocalTime OWL_START = LocalTime.of(23,0);
-    private static final LocalTime OWL_END = LocalTime.of(9,0);
-    private static final LocalTime LARK_START = LocalTime.of(22,0);
-    private static final LocalTime LARK_END = LocalTime.of(7,0);
-
+    private static final LocalTime OWL_START = LocalTime.of(23, 0);
+    private static final LocalTime OWL_END = LocalTime.of(9, 0);
+    private static final LocalTime LARK_START = LocalTime.of(22, 0);
+    private static final LocalTime LARK_END = LocalTime.of(7, 0);
 
     @Override
     public SleepAnalyticsResult apply(List<SleepingSession> sessions) {
         return new SleepAnalyticsResult("Ваш тип: ", findChronotype(sessions));
     }
+
     public static String findChronotype(List<SleepingSession> sessions) {
+
         if (sessions == null || sessions.isEmpty()) return Chronotype.DOVE.getRussianName();
         int owls = (int) sessions.stream()
                 .filter(ChronotypeFinder::isNightSession)
